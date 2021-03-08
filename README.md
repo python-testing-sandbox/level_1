@@ -41,9 +41,17 @@ Read/watch this during or after writing tests:
 - [Pragmatic unit testing (video)](https://www.youtube.com/watch?v=5iJWOPaNZDA)
 - [UnitTest by Martin Flower](https://martinfowler.com/bliki/UnitTest.html)
 
+## Testing requirements
+
+- Use python 3.9.
+- Use latest pytest.
+- Don't compose tests in `TestCase`-style classes, use modules instead.
+- Setup CI/CD with automatic coverage calculation and badge with coverage in readme.
+
 ## Review how to
 
-- Review considered to be done when reviewr left 3+ comments.
+- Before review, make sure, that tests *branch* coverage is 100%.
+- Review considered to be done when reviewer left 3+ comments.
 - Use [conventional comments](https://conventionalcomments.org/).
 - If you think, that some somment is not required to fix, use `non-blocking` decorator.
 - Every comment without `non-blocking` decorator has to be fixed by the author of code.
