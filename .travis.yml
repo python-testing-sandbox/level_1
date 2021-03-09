@@ -4,6 +4,7 @@ python:
 install:
   - pip install -r requirements.txt
 script:
+  - flake8 .
   - pytest .
   - coverage run -m pytest
   - coverage report -m code.py

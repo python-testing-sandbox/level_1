@@ -6,7 +6,7 @@ from code import (
     chunks, flat, is_python_class_name, max_with_default, is_path_in_exclude_list, split_camel_case_words,
     is_camel_case_word, if_logs_has_any_of_commands, has_recursive_calls, extract_all_constants_from_ast,
     parse_iso_datetime, get_image_height_in_pixels, get_full_class_name)
-from tests.conftest import MockResponse, MockImage, MockObject
+from tests.conftest import MockImage, MockObject
 
 
 @pytest.mark.parametrize(

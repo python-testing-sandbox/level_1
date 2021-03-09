@@ -2,7 +2,7 @@ import ast
 import datetime
 import io
 import re
-from typing import Iterable, Any, Optional, Union, Generator
+from typing import Iterable, Any, Optional, Generator
 
 from PIL import Image
 from requests import get
@@ -107,4 +107,3 @@ def max_with_default(items: Iterable, default: Optional = None):
 
 def is_python_class_name(name: str) -> bool:
     return name[0] == name[0].upper() and name[1:] == name[1:].lower()
-
