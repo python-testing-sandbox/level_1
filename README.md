@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/katyaaa86/level_1.svg?branch=main)](https://travis-ci.org/katyaaa86/level_1)
+
 # Testing sandbox level 1
 
 Welcome to the testing sandbox: practice-driven testing instrument.
