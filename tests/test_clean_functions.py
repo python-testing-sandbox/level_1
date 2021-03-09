@@ -164,6 +164,12 @@ def test_get_image_height_in_pixels(requests_mock, mocker, url, expected):
     assert get_image_height_in_pixels(url) == expected
 
 
-def test_get_full_class_name():
-    obj = MockObject()
-    assert get_full_class_name(obj) == 'tests.conftest.MockObject'
+@pytest.mark.parametrize(
+    'obj, expected',
+    [
+        (MockObject(), 'tests.conftest.MockObject'),
+        ([], 'list'),
+    ],
+)
+def test_get_full_class_name(obj, expected):
+    assert get_full_class_name(obj) == expected
