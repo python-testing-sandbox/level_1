@@ -4,8 +4,8 @@ import io
 import re
 from typing import Iterable, Any, Optional, Union, Generator
 
-import requests
 from PIL import Image
+from requests import get
 from requests.exceptions import MissingSchema
 
 
@@ -40,8 +40,8 @@ def parse_iso_datetime(iso_datetime: str) -> Optional[datetime.datetime]:
 
 def get_image_height_in_pixels(url: str) -> Optional[int]:
     try:
-        img_data = requests.get(url).content
-    except MissingSchema:  # pragma: no cover
+        img_data = get(url).content
+    except MissingSchema:
         return None
     im = Image.open(io.BytesIO(img_data))
     return im.size[1]

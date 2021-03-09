@@ -148,16 +148,20 @@ def test_parse_iso_datetime(iso_datetime, expected):
     assert parse_iso_datetime(iso_datetime) == expected
 
 
-def test_get_image_height_in_pixels(mocker):
-    mocker.patch(
-        'requests.get',
-        return_value=MockResponse(),
-    )
+@pytest.mark.parametrize(
+    'url, expected',
+    [
+        ('url', None),
+        ('http://test.com', 'M'),
+    ],
+)
+def test_get_image_height_in_pixels(requests_mock, mocker, url, expected):
+    requests_mock.get('http://test.com', content=b"abcdef")
     mocker.patch(
         'PIL.Image.open',
         return_value=MockImage(),
     )
-    assert get_image_height_in_pixels('url') == 'M'
+    assert get_image_height_in_pixels(url) == expected
 
 
 def test_get_full_class_name():
