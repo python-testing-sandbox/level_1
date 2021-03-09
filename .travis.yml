@@ -8,3 +8,7 @@ script:
   - pytest .
   - coverage run -m pytest
   - coverage report -m code.py
+before_install:
+  - pip install --user codecov
+after_success:
+  - codecov --file coverage/lcov.info --disable search
