@@ -6,19 +6,6 @@ class FakeClass:
     pass
 
 
-def fake_func(a):
-    return a + 5
-
-
-a = '''
-def recursive_fake_func(a):
-    if a == 0:
-        return
-
-    return recursive_fake_func(a - 1)
-'''
-
-
 def get_size():
     return 50
 

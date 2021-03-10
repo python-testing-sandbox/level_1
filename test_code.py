@@ -1,3 +1,4 @@
+import ast
 from contextlib import nullcontext as does_not_raise
 import datetime
 
@@ -164,16 +165,24 @@ def test_get_image_height_in_pixels(url, expected, monkeypatch, test_image_facto
     assert code.get_image_height_in_pixels(url) == expected
 
 
-# @pytest.mark.parametrize(
-#     'funcdef, expected',
-#     [
-#         (fake_func, False),
-#         (datetime, True),
-#     ]
-# )
-# def test_has_recursive_calls():
-#     assert code.has_recursive_calls(ast.parse(''))
+@pytest.mark.parametrize(
+    'ast_tree, expected',
+    [
+        (ast.parse('a = "literal"\nb = 5'), ['literal']),
+        (ast.parse('b = 5'), []),
+        (ast.parse('a = "literal"\nb = "new literal"'), ['literal', 'new literal']),
+    ]
+)
+def test_extract_all_constants_from_ast(ast_tree, expected):
+    assert code.extract_all_constants_from_ast(ast_tree) == expected
 
 
-# def test_extract_all_constants_from_ast():
-#     assert code.extract_all_constants_from_ast(ast.parse('fake_func')) == 1
+@pytest.mark.parametrize(
+    'funcdef, expected',
+    [
+        (ast.parse('def not_recursive(a, b, c):\n    return a + b + c').body[0], False),
+        (ast.parse('def recursive(a, b, c):\n    return recursive(a, b, c)').body[0], True),
+    ]
+)
+def test_has_recursive_calls(funcdef, expected):
+    assert code.has_recursive_calls(funcdef) == expected
