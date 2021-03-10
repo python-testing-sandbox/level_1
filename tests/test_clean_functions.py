@@ -117,8 +117,8 @@ def test_if_logs_has_any_of_commands(log, commands, expected):
 @pytest.mark.parametrize(
     'funcdef, expected',
     [
-        (ast.FunctionDef, False),
-        (ast.Call(name='name', func=ast.Name), False),
+        (ast.parse('''def func():\n return None''').body[0], False),
+        (ast.parse('''def func():\n return func()''').body[0], True),
     ],
 )
 def test_has_recursive_calls(funcdef, expected):
