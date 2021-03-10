@@ -171,13 +171,13 @@ def test_get_image_height_in_pixels(url, expected, monkeypatch, test_image_facto
 @pytest.mark.parametrize(
     'ast_tree, expected',
     [
-        (ast.parse('a = "literal"\nb = 5'), ['literal']),
-        (ast.parse('b = 5'), []),
-        (ast.parse('a = "literal"\nb = "new literal"'), ['literal', 'new literal']),
+        (ast.parse('a = "literal"\nb = 5'), {'literal'}),
+        (ast.parse('b = 5'), set()),
+        (ast.parse('a = "literal"\nb = "new literal"'), {'literal', 'new literal'}),
     ]
 )
 def test_extract_all_constants_from_ast(ast_tree, expected):
-    assert code.extract_all_constants_from_ast(ast_tree) == expected
+    assert {*code.extract_all_constants_from_ast(ast_tree)} == expected
 
 
 @pytest.mark.parametrize(
