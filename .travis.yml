@@ -8,3 +8,5 @@ script:
   - pytest .
   - coverage run -m pytest
   - coverage report -m code.py
+after_success:
+  - coveralls
