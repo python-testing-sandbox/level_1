@@ -1,6 +1,7 @@
 import ast
 import datetime
 import pytest
+from contextlib import nullcontext as does_not_raise
 
 from code import (
     chunks, flat, is_python_class_name, max_with_default, is_path_in_exclude_list, split_camel_case_words,
@@ -27,7 +28,9 @@ def test_chunks(some_list, chunk_size, expected):
     [
         ([[1, 2], [3, 4], [5]], [1, 2, 3, 4, 5]),
         ([['a', 'b', 'c'], ['d']], ['a', 'b', 'c', 'd']),
+        ([[1, 2, {}], ['a', 'b', {}]], [1, 2, {}, 'a', 'b', {}]),
         ([], []),
+        ([[], []], []),
     ],
 )
 def test_flat(some_list, expected):
@@ -35,32 +38,34 @@ def test_flat(some_list, expected):
 
 
 @pytest.mark.parametrize(
-    'name, expected',
+    'name, expected, expectation',
     [
-        ('Classname', True),
-        ('ClassName', False),
+        ('Classname', True, does_not_raise()),
+        ('ClassName', False, does_not_raise()),
+        ('classname', False, does_not_raise()),
+        ('className', False, does_not_raise()),
+        ('', None, pytest.raises(IndexError)),
     ],
 )
-def test_is_python_class_name(name, expected):
-    assert is_python_class_name(name) == expected
-
-
-def test_is_python_class_name_with_exception():
-    with pytest.raises(IndexError):
-        assert is_python_class_name('')
+def test_is_python_class_name(name, expected, expectation):
+    with expectation:
+        assert is_python_class_name(name) == expected
 
 
 @pytest.mark.parametrize(
-    'items, default, expected',
+    'items, default, expected, expectation',
     [
-        ([[1, 2], [3, 4], [5]], None, [5]),
-        ([[1, 2], [3, 4], [5]], 1, [5]),
-        ('', 1, 1),
-        ('', None, 0)
+        ([[1, 2], [3, 4], [5]], None, [5], does_not_raise()),
+        ([[1, 2], [3, 4], [5]], 1, [5], does_not_raise()),
+        ([3, 4, 5], 1, 5, does_not_raise()),
+        ([[1, 2], '3, 4', (5, 'b')], 1, None, pytest.raises(TypeError)),
+        ('', 1, 1, does_not_raise()),
+        ('', None, 0, does_not_raise())
     ],
 )
-def test_max_with_default(items, default, expected):
-    assert max_with_default(items, default) == expected
+def test_max_with_default(items, default, expected, expectation):
+    with expectation:
+        assert max_with_default(items, default) == expected
 
 
 @pytest.mark.parametrize(
@@ -76,15 +81,18 @@ def test_is_path_in_exclude_list(path, exclude, expected):
 
 
 @pytest.mark.parametrize(
-    'camel_cased_word, expected',
+    'camel_cased_word, expected, expectation',
     [
-        ('camelCasedWord', ['camel', 'cased', 'word']),
-        ('CamelCasedWord', ['camel', 'cased', 'word']),
-        ('CamelCasedWorD', ['camel', 'cased', 'wor', 'd']),
+        ('camelCasedWord', ['camel', 'cased', 'word'], does_not_raise()),
+        ('CamelCasedWord', ['camel', 'cased', 'word'], does_not_raise()),
+        ('CamelCasedWorD', ['camel', 'cased', 'wor', 'd'], does_not_raise()),
+        ('', None, pytest.raises(IndexError)),
+        ('camelcaseword', None, pytest.raises(IndexError)),
     ],
 )
-def test_split_camel_case_words(camel_cased_word, expected):
-    assert split_camel_case_words(camel_cased_word) == expected
+def test_split_camel_case_words(camel_cased_word, expected, expectation):
+    with expectation:
+        assert split_camel_case_words(camel_cased_word) == expected
 
 
 @pytest.mark.parametrize(
