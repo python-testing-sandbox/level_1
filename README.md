@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/katyaaa86/level_1.svg?branch=main)](https://travis-ci.org/katyaaa86/level_1)
+[![Coverage Status](https://coveralls.io/repos/github/katyaaa86/level_1/badge.svg?branch=main)](https://coveralls.io/github/katyaaa86/level_1?branch=main)
 
 # Testing sandbox level 1
 
