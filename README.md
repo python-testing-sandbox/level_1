@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/katyaaa86/level_1.svg?branch=main)](https://travis-ci.org/katyaaa86/level_1)
-[![Coverage Status](https://coveralls.io/repos/github/katyaaa86/level_1/badge.svg?branch=main)](https://coveralls.io/github/katyaaa86/level_1?branch=main)
+[![codecov](https://codecov.io/gh/katyaaa86/level_1/branch/main/graph/badge.svg?token=I2DA5UZ006)](https://codecov.io/gh/katyaaa86/level_1)
 
 # Testing sandbox level 1
 
