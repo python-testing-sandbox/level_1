@@ -3,6 +3,7 @@ from contextlib import nullcontext as does_not_raise
 import datetime
 
 import pytest
+import requests
 from PIL import Image
 
 import code
@@ -162,6 +163,7 @@ def test_split_camel_case_words(camel_cased_word, expected, expectation):
     ]
 )
 def test_get_image_height_in_pixels(url, expected, monkeypatch, test_image_factory):
+    monkeypatch.setattr(requests, 'get', b'some binary chars')
     monkeypatch.setattr(Image, 'open', test_image_factory)
     assert code.get_image_height_in_pixels(url) == expected
 
