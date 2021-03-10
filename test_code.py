@@ -100,6 +100,7 @@ def test_if_logs_has_any_of_commands(log, commands, expected):
         ('cAmel', True),
         ('small', False),
         ('BIG', False),
+        ('', False),
     ]
 )
 def test_is_camel_case_word(word, expected):
