@@ -129,21 +129,16 @@ def test_get_full_class_name(obj, expected):
 
 
 @pytest.mark.parametrize(
-    'some_list, chunk_size, expected, expectation',
+    'some_list, chunk_size, expected',
     [
-        ([1, 2, 3, 4, 5], 2, ([1, 2], [3, 4], [5]), pytest.raises(StopIteration)),
-        ([], 2, (), pytest.raises(StopIteration)),
+        ([1, 2, 3, 4, 5], 2, [[1, 2], [3, 4], [5]]),
+        ([], 2, []),
     ]
 )
-def test_chunks(some_list, chunk_size, expected, expectation):
+def test_chunks(some_list, chunk_size, expected):
     gen = code.chunks(some_list, chunk_size)
-    expected_iterator = iter(expected)
 
-    with expectation:
-        assert next(gen) == next(expected_iterator)
-        assert next(gen) == next(expected_iterator)
-        assert next(gen) == next(expected_iterator)
-        assert next(gen) == next(expected_iterator)
+    assert list(gen) == expected
 
 
 @pytest.mark.parametrize(
