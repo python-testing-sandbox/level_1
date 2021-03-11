@@ -1,0 +1,11 @@
+language: python
+python:
+  - "3.9"
+install:
+  - pip install -r requirements.txt
+script:
+  - flake8 .
+  - pytest --cov=. tests/
+  - coverage run -m --branch pytest
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

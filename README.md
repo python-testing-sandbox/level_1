@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/katyaaa86/level_1.svg?branch=main)](https://travis-ci.org/katyaaa86/level_1)
+[![codecov](https://codecov.io/gh/katyaaa86/level_1/branch/main/graph/badge.svg?token=I2DA5UZ006)](https://codecov.io/gh/katyaaa86/level_1)
+
 # Testing sandbox level 1
 
 Welcome to the testing sandbox: practice-driven testing instrument.

@@ -168,6 +168,7 @@ typings/
 
 # User-specific stuff:
 ../.idea
+.idea
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
@@ -326,7 +327,7 @@ zipsale_web/media/
 
 .pytest_cache/
 
-
+.editorconfig
 .ipython/
 .pyenv
 .envrc
