@@ -181,23 +181,23 @@ def test_get_image_height_in_pixels(url, expected, monkeypatch, test_image_facto
 
 
 @pytest.mark.parametrize(
-    'ast_tree, expected',
+    'module, expected',
     [
-        (ast.parse('a = "literal"\nb = 5'), {'literal'}),
-        (ast.parse('b = 5'), set()),
-        (ast.parse('a = "literal"\nb = "new literal"'), {'literal', 'new literal'}),
+        ('a = "literal"\nb = 5', {'literal'}),
+        ('b = 5', set()),
+        ('a = "literal"\nb = "new literal"', {'literal', 'new literal'}),
     ]
 )
-def test_extract_all_constants_from_ast(ast_tree, expected):
-    assert {*code.extract_all_constants_from_ast(ast_tree)} == expected
+def test_extract_all_constants_from_ast(module, expected):
+    assert {*code.extract_all_constants_from_ast(ast.parse(module))} == expected
 
 
 @pytest.mark.parametrize(
-    'funcdef, expected',
+    'module, expected',
     [
-        (ast.parse('def not_recursive(a, b, c):\n    return a + b + c').body[0], False),
-        (ast.parse('def recursive(a, b, c):\n    return recursive(a, b, c)').body[0], True),
+        ('def not_recursive(a, b, c):\n    return a + b + c', False),
+        ('def recursive(a, b, c):\n    return recursive(a, b, c)', True),
     ]
 )
-def test_has_recursive_calls(funcdef, expected):
-    assert code.has_recursive_calls(funcdef) == expected
+def test_has_recursive_calls(module, expected):
+    assert code.has_recursive_calls(ast.parse(module).body[0]) == expected
