@@ -1,5 +1,4 @@
 import ast
-from contextlib import nullcontext as does_not_raise
 import datetime
 
 import pytest
@@ -19,20 +18,27 @@ def test_is_python_class_name(name, expected):
 
 
 @pytest.mark.parametrize(
-    'args, expected, expectation',
+    'args, expected',
     [
-        (([], None), 0, does_not_raise()),
-        (([],), 0, does_not_raise()),
-        (([], 5), 5, does_not_raise()),
-        (([-1], None), -1, does_not_raise()),
-        (([1, 3, -1, 100], 5), 100, does_not_raise()),
-        (((1, 3, -1, 101), 5), 101, does_not_raise()),
-        (((1, 3, -1, 101),), 101, does_not_raise()),
-        (((1, 3, -1, '101'),), None, pytest.raises(TypeError)),
+        (([], None), 0),
+        (([],), 0),
+        (([], 5), 5),
+        (([-1], None), -1),
+        (([1, 3, -1, 100], 5), 100),
+        (((1, 3, -1, 101), 5), 101),
+        (((1, 3, -1, 101),), 101),
     ]
 )
-def test_max_with_default(args, expected, expectation):
-    with expectation:
+def test_max_with_default(args, expected):
+    assert code.max_with_default(*args) == expected
+
+
+@pytest.mark.parametrize(
+    'args, expected, ',
+    [(((1, 3, -1, '101'),), None)]
+)
+def test_max_with_default_with_exception(args, expected):
+    with pytest.raises(TypeError):
         assert code.max_with_default(*args) == expected
 
 
@@ -141,17 +147,23 @@ def test_chunks(some_list, chunk_size, expected, expectation):
 
 
 @pytest.mark.parametrize(
-    'camel_cased_word, expected, expectation',
+    'camel_cased_word, expected',
     [
-        ('small', [], pytest.raises(IndexError)),
-        ('BigGood', ['big', 'good'], does_not_raise()),
-        ('Big', ['big'], does_not_raise()),
-        ('bIg', ['b', 'ig'], does_not_raise()),
-        ('', [], pytest.raises(IndexError)),
+        ('BigGood', ['big', 'good']),
+        ('Big', ['big']),
+        ('bIg', ['b', 'ig']),
     ]
 )
-def test_split_camel_case_words(camel_cased_word, expected, expectation):
-    with expectation:
+def test_split_camel_case_words(camel_cased_word, expected):
+    assert code.split_camel_case_words(camel_cased_word) == expected
+
+
+@pytest.mark.parametrize(
+    'camel_cased_word, expected, ',
+    [('small', []), ('', [])]
+)
+def test_split_camel_case_words_with_exception(camel_cased_word, expected):
+    with pytest.raises(IndexError):
         assert code.split_camel_case_words(camel_cased_word) == expected
 
 
