@@ -60,7 +60,7 @@ def test_is_python_class_name(name, expected, expectation):
         ([3, 4, 5], 1, 5, does_not_raise()),
         ([[1, 2], '3, 4', (5, 'b')], 1, None, pytest.raises(TypeError)),
         ('', 1, 1, does_not_raise()),
-        ('', None, 0, does_not_raise())
+        ('', None, 0, does_not_raise()),
     ],
 )
 def test_max_with_default(items, default, expected, expectation):
@@ -73,7 +73,7 @@ def test_max_with_default(items, default, expected, expectation):
     [
         ('abc def', ['a', 'b', 'c', 'z'], True),
         ('abc def', ['z'], False),
-        ('', [], False)
+        ('', [], False),
     ],
 )
 def test_is_path_in_exclude_list(path, exclude, expected):
@@ -125,8 +125,8 @@ def test_if_logs_has_any_of_commands(log, commands, expected):
 @pytest.mark.parametrize(
     'funcdef, expected',
     [
-        (ast.parse('''def func():\n return None''').body[0], False),
-        (ast.parse('''def func():\n return func()''').body[0], True),
+        (ast.parse('def func():\n return None').body[0], False),
+        (ast.parse('def func():\n return func()').body[0], True),
     ],
 )
 def test_has_recursive_calls(funcdef, expected):
@@ -164,7 +164,7 @@ def test_parse_iso_datetime(iso_datetime, expected):
     ],
 )
 def test_get_image_height_in_pixels(requests_mock, mocker, url, expected):
-    requests_mock.get('http://test.com', content=b"abcdef")
+    requests_mock.get('http://test.com', content=b'abcdef')
     mocker.patch(
         'PIL.Image.open',
         return_value=MockImage(),

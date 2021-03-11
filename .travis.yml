@@ -5,8 +5,7 @@ install:
   - pip install -r requirements.txt
 script:
   - flake8 .
-  - pytest .
-  - coverage run -m pytest
-  - coverage report -m code.py
+  - pytest --cov=. tests/
+  - coverage run -m --branch pytest
 after_success:
   - bash <(curl -s https://codecov.io/bash)
