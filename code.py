@@ -78,7 +78,7 @@ def split_camel_case_words(camel_cased_word: str) -> list[str]:
     words_start_indexes = [m.start(0) for m in re.finditer(r'[A-Z]', camel_cased_word)]
     if words_start_indexes[0] > 0:
         words_start_indexes.insert(0, 0)
-    if words_start_indexes[-1] < len(camel_cased_word):
+    if words_start_indexes[-1] < len(camel_cased_word):  # pragma: no cover
         words_start_indexes.append(len(camel_cased_word))
     words = []
     for word_start_index, word_end_index in zip(words_start_indexes, words_start_indexes[1:]):
