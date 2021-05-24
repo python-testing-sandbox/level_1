@@ -1,6 +1,6 @@
 test:
-	python -m pytest -p no:warnings --disable-socket
+	python -m pytest
 coverage:
-	python -m pytest --cov=code --cov-report=xml -p no:warnings --disable-socket
+	python -m pytest --cov=code --cov-report=xml
 check:
 	make test
