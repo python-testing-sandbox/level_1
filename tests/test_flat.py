@@ -6,8 +6,8 @@ import pytest
 @pytest.mark.parametrize(
     "some_list, list_result, exception",
     [
-        ([[1, 2], [3]], [1, 2, 3], None),
-        ([[1, 2], [3,[4]]], [1, 2, 3,[4]], None),
+        ([[1, 'a'], [3]], [1, 'a', 3], None),
+        ([[1, {2}], [3,[4]]], [1, {2}, 3,[4]], None),
         ([1, 2, 3], [], TypeError),
     ],
 )
