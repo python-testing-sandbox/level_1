@@ -12,5 +12,4 @@ from code import has_recursive_calls
     ],
 )
 def test_recursive_calls(funcdef, result):
-    print(funcdef.body[0])
     assert has_recursive_calls(funcdef) == result
