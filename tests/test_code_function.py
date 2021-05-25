@@ -133,6 +133,8 @@ def test_max_with_default(some_items, default, expected):
         ('SomeCamelCasedWord', ['some', 'camel', 'cased', 'word']),
         (' CamelCasedWord', [' ', 'camel', 'cased', 'word']),
         ('CamelCasedsoMeWorD', ['camel', 'casedso', 'me', 'wor', 'd']),
+        ('aCa', ['a', 'ca']),
+        (" Camel Case WordCase case wordCase", [' ', 'camel ', 'case ', 'word', 'case case word', 'case'])
     ]
 )
 def test_split_camel_case_words(camel_cased_word, expected):
