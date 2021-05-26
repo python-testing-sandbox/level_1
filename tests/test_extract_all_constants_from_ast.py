@@ -1,6 +1,6 @@
-import pytest
-
 from code import extract_all_constants_from_ast
+
+import pytest
 from read_test_file import read_test_file
 
 
