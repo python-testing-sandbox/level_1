@@ -7,7 +7,4 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - python -m pytest -v
-
-after_script:
-  - python -m pytest --cov=code
+  - python -m pytest -v --cov=code
