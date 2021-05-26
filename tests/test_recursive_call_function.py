@@ -2,13 +2,14 @@ import ast
 import pytest
 
 from code import has_recursive_calls
+from read_test_file import read_test_file
 
 
 @pytest.mark.parametrize(
     "funcdef, result",
     [
-        (ast.parse("def recursive(a): \n return recursive(a)").body[0], True),
-        (ast.parse("def not_recursive(a): \n return a").body[0], False),
+        (read_test_file('has_recursive.py').body[0], True),
+        (read_test_file('no_recursive.py').body[0], False),
     ],
 )
 def test_recursive_calls(funcdef, result):
