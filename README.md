@@ -1,5 +1,8 @@
 # Testing sandbox level 1
 
+[![Build Status](https://travis-ci.com/DmitryTokyo/level_1.svg?branch=main)](https://travis-ci.com/DmitryTokyo/level_1)
+[![codecov](https://codecov.io/gh/DmitryTokyo/level_1/branch/main/graph/badge.svg?token=25YKHAMA72)](https://codecov.io/gh/DmitryTokyo/level_1)
+
 Welcome to the testing sandbox: practice-driven testing instrument.
 It can help you to get more comfortable and skilful at writing different
 types of tests.
