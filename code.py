@@ -2,7 +2,7 @@ import ast
 import datetime
 import io
 import re
-from typing import Iterable, Any, Optional, Union, Generator
+from typing import Iterable, Any, Optional, Generator
 
 from PIL import Image
 from requests import get
