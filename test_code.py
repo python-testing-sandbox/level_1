@@ -26,7 +26,7 @@ def test_has_recursive_calls():
     expression = '5/3+8'
     funcdef = ast.parse(expression)
     calls = has_recursive_calls(funcdef)
-    assert calls == False
+    assert not calls
 
 
 def test_parse_iso_datetime():
@@ -122,4 +122,4 @@ def test_max_with_default(items, default, expected):
 
 def test_is_python_class_name():
     name = 'List'
-    assert is_python_class_name(name) == True
+    assert is_python_class_name(name)
