@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/dumbturtle/level_1.svg?branch=main)](https://travis-ci.com/dumbturtle/level_1)
+[![codecov](https://codecov.io/gh/dumbturtle/level_1/branch/main/graph/badge.svg?token=N95O21194F)](https://codecov.io/gh/dumbturtle/level_1)
+
 # Testing sandbox level 1
 
 Welcome to the testing sandbox: practice-driven testing instrument.

@@ -97,7 +97,7 @@ def get_full_class_name(obj: Any) -> str:
     return module + '.' + obj.__class__.__name__
 
 
-def max_with_default(items: Iterable, default: Optional = None):
+def max_with_default(items: Iterable, default: Optional[int] = None):
     default = default or 0
     items = list(items)
     if not items and default is not None:
