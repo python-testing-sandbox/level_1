@@ -4,7 +4,7 @@ import pytest
 
 
 @pytest.mark.parametrize(
-    "some_list, chunk_size, chunk_result,exception",
+    "some_list, chunk_size, chunk_result, exception",
     [
         ([1, 2, 3], 3, [[1, 2, 3]], None),
         ([1, 2, 3], 2, [[1, 2], [3]], None),
