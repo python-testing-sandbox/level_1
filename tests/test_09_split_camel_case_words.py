@@ -11,6 +11,7 @@ import pytest
         ("Camel Case", ["camel ", "case"], None),
         ("nocamelcase", [], IndexError),
         ("no camel case", [], IndexError),
+        ("cAmelCase", ["c", "amel", "case"], None),
     ],
 )
 def test_split_camel_case_words(camel_cased_word, result, exception):
