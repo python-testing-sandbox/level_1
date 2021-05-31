@@ -36,3 +36,5 @@ flake8-multiline-containers==0.0.17
 flake8-absolute-import==1.0
 flake8-simplify==0.13.0
 flake8-functions-names==0.0.5
+mypy-extensions==0.4.3
+
