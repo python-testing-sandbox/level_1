@@ -1,3 +1,4 @@
 [flake8]
 max-line-length = 120
-exclude = venv
+exclude = venv, code.py
+ignore = C812, D103, TAE001, D100, D101
