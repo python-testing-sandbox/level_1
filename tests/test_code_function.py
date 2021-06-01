@@ -14,6 +14,8 @@ from .conftest import MyTestClass
     [
         ([['People'], ['Name', 'Job']], ['People', 'Name', 'Job']),
         ([[], [1, 'a']], [1, 'a']),
+        ([[], {}], []),
+        ([{}, [1, 2, {'a': 4}]], [1, 2, {'a': 4}])
     ],
 )
 def test_flat(some_list, expected):
@@ -65,6 +67,7 @@ def test_chunks(some_list, chunk_size, expected):
         (['user post new recipes', 'user read url'], ['update', 'read', 'exit'], True),
         (['delete', 'send'], ['update'], False),
         ([], ['read'], False),
+        (['start'], ['start'], True)
     ],
 )
 def test_if_logs_has_any_of_commands(log, some_commands, expected):
