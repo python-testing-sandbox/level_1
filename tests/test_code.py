@@ -65,8 +65,7 @@ def test_if_logs_has_any_of_commands_with_epmty_lists(log, commands):
 
 
 def get_image():
-    img = Image.new('RGB', (100,100), color='white')
+    img = Image.new('RGB', (100, 100), color='white')
     buf = io.BytesIO()
     img.save(buf, format='JPEG')
     return buf.read()
-
