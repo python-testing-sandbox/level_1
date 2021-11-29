@@ -1,11 +1,9 @@
-import io
+import datetime
 
 import pytest
-from PIL import Image
 
 import code
-
-from fake_class import Money
+from tests.fake_class import Money
 
 
 @pytest.mark.parametrize('class_name,expected', [
@@ -31,7 +29,7 @@ def test_max_with_default(items, default, expected):
     (3, 'int'),
     (object, 'type'),
     (None, 'NoneType'),
-    (Money(5), 'fake_class.Money'),
+    (Money(5), 'tests.fake_class.Money'),
 ])
 def test_get_full_class_name(obj, class_name):
     assert code.get_full_class_name(obj) == class_name
@@ -58,14 +56,29 @@ def test_split_camel_case_words_without_capital_letters(word, expected):
 @pytest.mark.parametrize('log,commands', [
     (['log_entity1'], []),
     ([], ['CMD1']),
-    ([], [])
+    ([], []),
+    (['CMD12'], ['CMD1']),
 ])
-def test_if_logs_has_any_of_commands_with_epmty_lists(log, commands):
+def test_if_logs_has_any_of_commands_negative(log, commands):
     assert not code.if_logs_has_any_of_commands(log, commands)
 
 
-def get_image():
-    img = Image.new('RGB', (100, 100), color='white')
-    buf = io.BytesIO()
-    img.save(buf, format='JPEG')
-    return buf.read()
+@pytest.mark.parametrize('log,commands', [
+    (['', 'CMD1'], ['CMD1']),
+    (['Log1', 'CREATE_USER email pass'], ['CREATE_USER']),
+    (['request DELETE /users/email', '2021-02-22T15:02:01 DELETE_USER {email: EMAIL}'], ['DELETE_USER']),
+])
+def test_if_logs_has_any_of_commands(log, commands):
+    assert code.if_logs_has_any_of_commands(log, commands)
+
+
+now = datetime.datetime.utcnow()
+
+
+@pytest.mark.parametrize('iso_datetime_str,expected', [
+    (now.isoformat(), now),
+    (f'{now.isoformat()}Z', now),
+    ('NotRealyISODate', None)
+])
+def test_parse_iso_datetime(iso_datetime_str, expected):
+    assert code.parse_iso_datetime(iso_datetime_str) == expected
