@@ -9,7 +9,7 @@ from tests.fake_class import Money
 @pytest.mark.parametrize('class_name,expected', [
     ('class_name', False),
     ('ClassName', False),
-    ('Classname', True)
+    ('Classname', True),
 ])
 def test_is_python_class_name(class_name, expected):
     assert code.is_python_class_name(class_name) == expected
@@ -19,7 +19,7 @@ def test_is_python_class_name(class_name, expected):
     (range(0, 9), None, 8),
     ([], None, 0),
     ([], 3, 3),
-    (range(100, 102), 192, 101)
+    (range(100, 102), 192, 101),
 ])
 def test_max_with_default(items, default, expected):
     assert code.max_with_default(items, default=default) == expected
@@ -47,7 +47,7 @@ def test_split_camel_case_words(camel_cased_word, words):
     ('not_camel_cased_word', False),
     ('camelCase', True),
     ('NotCamelCase', True),
-    ('', False)
+    ('', False),
 ])
 def test_split_camel_case_words_without_capital_letters(word, expected):
     assert code.is_camel_case_word(word) == expected
@@ -78,7 +78,31 @@ now = datetime.datetime.utcnow()
 @pytest.mark.parametrize('iso_datetime_str,expected', [
     (now.isoformat(), now),
     (f'{now.isoformat()}Z', now),
-    ('NotRealyISODate', None)
+    ('NotRealyISODate', None),
 ])
 def test_parse_iso_datetime(iso_datetime_str, expected):
     assert code.parse_iso_datetime(iso_datetime_str) == expected
+
+
+@pytest.mark.parametrize('iterable,chunk_size', [
+    (list(range(0, 9)), 2),
+])
+def test_chunks(iterable, chunk_size):
+    source = []
+    [source.extend(chunk) for chunk in list(code.chunks(iterable, chunk_size))]
+    assert source == iterable
+
+
+@pytest.mark.parametrize('nested,flatted', [
+    ([[12, 2, 3], [4]], [12, 2, 3, 4]),
+    ([[]], []),
+])
+def test_flat(nested, flatted):
+    assert code.flat(nested) == flatted
+
+
+@pytest.mark.parametrize('path,exclude', [
+    ('/fword/some/path', ['not', 'fword']),
+])
+def test_is_path_in_exclude_list(path, exclude):
+    assert code.is_path_in_exclude_list(path, exclude)
