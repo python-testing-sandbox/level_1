@@ -19,7 +19,6 @@ def func_with_strings():
     assert set(code.extract_all_constants_from_ast(ast_tree)) == {'A', 'B', 'C', ','}
 
 
-@pytest.mark.xfail
 def test_rec():
     fibonacci = """
 def fibonacci(n):
@@ -28,7 +27,7 @@ def fibonacci(n):
     elif n == 2:
         return 1
     else:
-        return f(n-1) + f(n-2)
+        return fibonacci(n-1) + fibonacci(n-2)
 fibonacci(5)
     """
     ast_tree = ast.parse(fibonacci)
