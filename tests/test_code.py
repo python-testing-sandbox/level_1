@@ -107,10 +107,11 @@ def test_flat(nested, flatted):
 def test_is_path_in_exclude_list(path, exclude):
     assert code.is_path_in_exclude_list(path, exclude)
 
+
 @pytest.mark.parametrize('url,expected', [
     ('//notrealurl.com/img.jpg', None),
     ('asdfjads', None),
-    ('https://docs.pytest.org/en/6.2.x/_static/pytest1.png', 143)
+    ('https://docs.pytest.org/en/6.2.x/_static/pytest1.png', 143),
 ])
 def test_get_image_height_in_pixels(url, expected):
     assert code.get_image_height_in_pixels(url) == expected
